@@ -24,4 +24,6 @@ else
   default['salt']['minion']['package'] = 'salt-minion'
 end
 
+default['salt']['minion']['windows']['installer_url'] = 'https://docs.saltstack.com/downloads/Salt-Minion-2014.1.7-AMD64-Setup.exe'
+
 default['salt']['minion']['grains'] = {}

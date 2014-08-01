@@ -12,9 +12,21 @@
 
 include_recipe "salt::_setup"
 
-package node['salt']['minion']['package'] do
-  version node['salt']['version'] if node['salt']['version']
-  action :install
+unless platform_family?('windows')
+  package node['salt']['minion']['package'] do
+    version node['salt']['version'] if node['salt']['version']
+    action :install
+  end
+else # windows install
+  remote_file "node['chef_client']['cache_path']/salt.exe" do
+    source node['salt']['minion']['windows']['installer_url']
+    checksum "sha256checksum"
+  end
+  
+  batch "Output directory list" do
+    code 
+    action :run
+  end
 end
 
 service 'salt-minion' do 

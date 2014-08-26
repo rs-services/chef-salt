@@ -1,7 +1,6 @@
 
 # Name of salt minion
-#default['salt']['minion']['id'] = node.name
-default['salt']['minion']['id'] = node.hostname
+default['salt']['minion']['id'] = node.name
 
 # The master or masters to connect to. Only set if you wish to override the
 # default searching behavior.

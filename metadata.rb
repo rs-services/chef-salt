@@ -70,6 +70,15 @@ attribute "salt/minion/environment",
 	'salt::minion'
 	]	
 
+attribute "salt/minion/id",
+  :display_name => "Name of this minion",
+  :description =>
+  "The minion name that this host should send to the salt-master.",
+  :required => "optional",
+  :recipes => [
+    'salt::minion'
+  ]
+
 attribute "salt/minion/grains",
 	:display_name => "Salt Grains",
 	:description =>

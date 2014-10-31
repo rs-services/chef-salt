@@ -14,6 +14,7 @@ include_recipe "salt::_setup"
 
 package node.salt['minion']['package'] do
   version node.salt['version'] if node.salt['version']
+  options node.salt['minion']['install_opts'] unless node.salt['minion']['install_opts'].nil?
   action :install
 end
 
@@ -22,7 +23,7 @@ service 'salt-minion' do
 end
 
 unless node.salt['minion']['master']
-  master_search = "roles:#{node.salt['role']['master']}"
+  master_search = "role:#{node.salt['role']['master']}"
   if node.salt['minion']['master_environment'] and node.salt['minion']['master_environment'] != '_default'
     master_search += " AND chef_environment:#{node.salt['minion']['master_environment']}" 
   end

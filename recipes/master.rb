@@ -3,6 +3,7 @@ include_recipe "salt::_setup"
 
 package node['salt']['master']['package'] do
   version node['salt']['version'] if node['salt']['version']
+  options node['salt']['master']['install_opts'] unless node['salt']['master']['install_opts'].nil?
   action :install
 end
 
@@ -28,7 +29,7 @@ end
 
 unless Chef::Config[:solo]
   
-  minion_search = "roles:#{node.salt['role']['minion']}"
+  minion_search = "role:#{node.salt['role']['minion']}"
   if node.salt['master']['environment']
     minion_search += " AND chef_environment:#{node.salt['master']['environment']}" 
   end
